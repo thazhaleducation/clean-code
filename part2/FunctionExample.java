@@ -35,7 +35,12 @@ public class FunctionExample {
       } else {
         priceWithTaxStr = "-";
       }
-      String line = String.format("%d\t%s\t\t%s\t%s\t%s\n", i + 1, p.getName(), p.getPrice().toString(), discountedPriceStr, priceWithTaxStr);  
+      
+      String line = String.format("%d\t%s\t\t%s\t%s\t%s\n",
+          i + 1, p.getName(),
+          p.getPrice().toString(),
+          discountedPriceStr,
+          priceWithTaxStr);
       sb.append(line);
     }
     System.out.println(sb.toString());
