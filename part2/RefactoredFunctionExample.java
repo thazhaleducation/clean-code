@@ -2,7 +2,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RefactoredFunctionExample {
-  final static DecimalFormat df = new DecimalFormat("0.00");
+  final static DecimalFormat PRICE_FORMATTER_WITH_TWO_DECIMALS = new DecimalFormat("0.00");
   final static String HEADER = "S.No\tProduct Name\tPrice\tDiscountPrice\tPriceWithTax\n";
 
   public static void main(String[] args) {
@@ -18,8 +18,7 @@ public class RefactoredFunctionExample {
 
     for (int i = 0; i < productList.size(); i++) {
       Product p = productList.get(i);
-      String invoiceStr = getInvoiceStr(p);
-      String line = concatSerialNo(i + 1, invoiceStr);
+      String line = getInvoiceStr(p, i + 1);
       sb.append(line);
     }
 
@@ -27,18 +26,15 @@ public class RefactoredFunctionExample {
   }
 
 
-  public static String getInvoiceStr(Product p) {
-    String discountedPriceStr = df.format(getDiscountedPrice(p));
-    String priceWithTaxStr = df.format(getPriceWithTax(p, getDiscountedPrice(p)));
-    return String.format("%s\t\t%s\t%s\t%s\n",
+  public static String getInvoiceStr(Product p, Integer serialNo) {
+    String discountedPriceStr = PRICE_FORMATTER_WITH_TWO_DECIMALS.format(getDiscountedPrice(p));
+    String priceWithTaxStr = PRICE_FORMATTER_WITH_TWO_DECIMALS.format(getPriceWithTax(p, getDiscountedPrice(p)));
+    return String.format("%s\t%s\t\t%s\t%s\t%s\n",
+        serialNo,
         p.getName(),
         p.getPrice().toString(),
         discountedPriceStr,
         priceWithTaxStr);
-  }
-
-  public static String concatSerialNo(int serialNo, String invoiceLine) {
-    return String.format("%d\t%s", serialNo, invoiceLine);
   }
 
   public static Double getDiscountedPrice(Product p) {

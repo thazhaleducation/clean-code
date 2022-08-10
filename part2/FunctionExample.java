@@ -32,7 +32,7 @@ public class FunctionExample {
       if(p.getTaxPercentage() != 0) {
         priceWithTax = discountedPrice + discountedPrice * p.getTaxPercentage()/100;
         priceWithTaxStr = df.format(priceWithTax).toString();
-      } else {-
+      } else {0
         priceWithTaxStr = "-";
       }
 
@@ -46,6 +46,18 @@ public class FunctionExample {
     System.out.println(sb.toString());
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Product {
   private String name;
