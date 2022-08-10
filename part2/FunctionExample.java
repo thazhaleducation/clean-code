@@ -7,6 +7,7 @@ public class FunctionExample {
     productList.add(new Product("Mobile", 13000.0, 10.0, 12.0));
     productList.add(new Product("Monitor", 15000.0, 5.0, 15.0));
     productList.add(new Product("Speaker", 15000.0, 5.0, 0.0));
+    productList.add(new Product("Mouse", 1000.0, 0.0, 5.0));
     printInvoice(productList);
   }
 
@@ -31,33 +32,36 @@ public class FunctionExample {
 
       // if product has discountPercentage other than 0 then calculate discounted
       // price and discounted price string
-      // Otherwise set discounted price to 0.0 and discounted price string to -
+      // Otherwise set discounted price to product price
       if(p.getDiscountPercentage() != 0) {
         discountedPrice = p.getPrice() - p.getDiscountPercentage() * p.getPrice()/100;
         discountedPriceStr = df.format(discountedPrice).toString();
       } else {
-        discountedPrice = 0.0;
-        discountedPriceStr = "-";
+        discountedPrice = p.getPrice();
+        discountedPriceStr = p.getPrice().toString();
       }
       
       // if product has taxPercentage other than 0 then calculate tax for the discounted prices
       // and its string format
-      // Otherwise set price with tax equal to the price of the product
+      // Otherwise set price with tax equal to the discountedPrice of the product
       if(p.getTaxPercentage() != 0) {
         priceWithTax = discountedPrice + discountedPrice * p.getTaxPercentage()/100;
         priceWithTaxStr = df.format(priceWithTax).toString();
       } else {
-        priceWithTax = p.getPrice();
-        priceWithTaxStr = p.getPrice().toString();
+        priceWithTax = discountedPrice;
+        priceWithTaxStr = discountedPrice.toString();
       }
-
+      // Format the string to be added with all values
       String line = String.format("%d\t%s\t\t%s\t%s\t%s\n",
-          i + 1, p.getName(),
+          i + 1, 
+          p.getName(),
           p.getPrice().toString(),
           discountedPriceStr,
           priceWithTaxStr);
+      // Add invoice line to string buffer
       sb.append(line);
     }
+    // print the complete invoice string
     System.out.println(sb.toString());
   }
 }

@@ -10,6 +10,7 @@ public class RefactoredFunctionExample {
     productList.add(new Product("Mobile", 13000.0, 10.0, 12.0));
     productList.add(new Product("Monitor", 15000.0, 5.0, 15.0));
     productList.add(new Product("Speaker", 15000.0, 5.0, 0.0));
+    productList.add(new Product("Mouse", 1000.0, 0.0, 5.0));
     printInvoice(productList);
   }
 
@@ -28,8 +29,8 @@ public class RefactoredFunctionExample {
 
 
   public static String getInvoiceStr(Product p, Integer serialNo) {
-    String discountedPriceStr = PRICE_FORMATTER_WITH_TWO_DECIMALS.format(getDiscountedPrice(p));
-    String priceWithTaxStr = PRICE_FORMATTER_WITH_TWO_DECIMALS.format(getPriceWithTax(p, getDiscountedPrice(p)));
+    String discountedPriceStr = PRICE_FORMATTER_WITH_TWO_DECIMALS.format(p.getDiscountedPrice());
+    String priceWithTaxStr = PRICE_FORMATTER_WITH_TWO_DECIMALS.format(getPriceWithTax(p, p.getDiscountedPrice()));
     return String.format("%s\t%s\t\t%s\t%s\t%s\n",
         serialNo,
         p.getName(),
@@ -39,7 +40,7 @@ public class RefactoredFunctionExample {
   }
 
   public static Double getDiscountedPrice(Product p) {
-    Double discountedPrice = 0.0;
+    Double discountedPrice = p.getPrice();
     if (p.getDiscountPercentage() != 0) {
       discountedPrice = p.getPrice() - p.getDiscountPercentage() * p.getPrice() / 100;
     }
@@ -47,7 +48,7 @@ public class RefactoredFunctionExample {
   }
 
   public static Double getPriceWithTax(Product p, Double discountedPrice) {
-    Double priceWithTax = p.getPrice();
+    Double priceWithTax = discountedPrice;
     if (p.getTaxPercentage() != 0) {
       priceWithTax = discountedPrice + discountedPrice * p.getTaxPercentage() / 100;
     }
@@ -84,4 +85,13 @@ class Product {
   public Double getTaxPercentage() {
     return taxPercentage;
   }
+
+  public Double getDiscountedPrice() {
+    Double discountedPrice = getPrice();
+    if (getDiscountPercentage() != 0) {
+      discountedPrice = getPrice() - getDiscountPercentage() * getPrice() / 100;
+    }
+    return discountedPrice;
+  }
+
 }

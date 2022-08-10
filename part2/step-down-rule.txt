@@ -1,0 +1,18 @@
+Print Invoice
+
+
+HOW TO: Print Invoice
+- print header
+- print invoice detail for each product
+
+
+HOW TO: print invoice detail
+- name, price, discount price, price with tax
+
+
+HOW TO: discount price
+- if discount exists apply the discount formula else product price
+
+
+HOW TO: tax price
+- if tax exists apply the tax formula else discount price

@@ -1,0 +1,29 @@
+Print Invoice
+-> String buffer initialization
+-> Adding HEADER to String buffer
+-> Declare and initializse a Formatter for double with 2 decimal
+-> Looping the products
+---> getInvoiceStr(product)
+-> complete string is printed
+
+
+getInvoiceStr
+----> Declare local variables
+----> discount calculation
+----> price with tax calculation
+----> Format the string to be added with all values
+----> Add invoice line to string buffer
+
+
+
+discount calculation
+----> if product has discountPercentage other than 0 then 
+-------> calculate discounted price and discounted price string
+-----> Otherwise 
+-------> set discounted price equal to product price
+
+price with tax calculation
+----> if product has taxPercentage other than 0 then 
+------->calculate tax for the discounted prices and its string format
+----> Otherwise
+-------> set price with tax equal to the discounted price of the product
