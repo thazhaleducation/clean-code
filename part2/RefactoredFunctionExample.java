@@ -9,6 +9,7 @@ public class RefactoredFunctionExample {
     ArrayList<Product> productList = new ArrayList<>();
     productList.add(new Product("Mobile", 13000.0, 10.0, 12.0));
     productList.add(new Product("Monitor", 15000.0, 5.0, 15.0));
+    productList.add(new Product("Speaker", 15000.0, 5.0, 0.0));
     printInvoice(productList);
   }
 
@@ -46,7 +47,7 @@ public class RefactoredFunctionExample {
   }
 
   public static Double getPriceWithTax(Product p, Double discountedPrice) {
-    Double priceWithTax = 0.0;
+    Double priceWithTax = p.getPrice();
     if (p.getTaxPercentage() != 0) {
       priceWithTax = discountedPrice + discountedPrice * p.getTaxPercentage() / 100;
     }

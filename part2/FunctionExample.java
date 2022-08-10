@@ -6,21 +6,32 @@ public class FunctionExample {
     ArrayList<Product> productList = new ArrayList<>();
     productList.add(new Product("Mobile", 13000.0, 10.0, 12.0));
     productList.add(new Product("Monitor", 15000.0, 5.0, 15.0));
+    productList.add(new Product("Speaker", 15000.0, 5.0, 0.0));
     printInvoice(productList);
   }
 
   public static void printInvoice(ArrayList<Product> productList) {
+    // String buffer initialization
     StringBuffer sb = new StringBuffer();
+    
+    // Adding HEADER to String buffer
     sb.append("S.No\tProduct Name\tPrice\tDiscountPrice\tPriceWithTax\n");
+    // Declare and initializse a Formatter for double with 2 decimal
     DecimalFormat df = new DecimalFormat("0.00");
+
+    // Looping the products
     for (int i = 0; i < productList.size(); i++) {
       
+      // Declare local variables
       Product p = productList.get(i);
       Double discountedPrice;
       String discountedPriceStr;
       Double priceWithTax;
       String priceWithTaxStr;
 
+      // if product has discountPercentage other than 0 then calculate discounted
+      // price and discounted price string
+      // Otherwise set discounted price to 0.0 and discounted price string to -
       if(p.getDiscountPercentage() != 0) {
         discountedPrice = p.getPrice() - p.getDiscountPercentage() * p.getPrice()/100;
         discountedPriceStr = df.format(discountedPrice).toString();
@@ -29,11 +40,15 @@ public class FunctionExample {
         discountedPriceStr = "-";
       }
       
+      // if product has taxPercentage other than 0 then calculate tax for the discounted prices
+      // and its string format
+      // Otherwise set price with tax equal to the price of the product
       if(p.getTaxPercentage() != 0) {
         priceWithTax = discountedPrice + discountedPrice * p.getTaxPercentage()/100;
         priceWithTaxStr = df.format(priceWithTax).toString();
-      } else {0
-        priceWithTaxStr = "-";
+      } else {
+        priceWithTax = p.getPrice();
+        priceWithTaxStr = p.getPrice().toString();
       }
 
       String line = String.format("%d\t%s\t\t%s\t%s\t%s\n",
