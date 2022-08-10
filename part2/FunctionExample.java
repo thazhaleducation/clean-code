@@ -32,10 +32,10 @@ public class FunctionExample {
       if(p.getTaxPercentage() != 0) {
         priceWithTax = discountedPrice + discountedPrice * p.getTaxPercentage()/100;
         priceWithTaxStr = df.format(priceWithTax).toString();
-      } else {
+      } else {-
         priceWithTaxStr = "-";
       }
-      
+
       String line = String.format("%d\t%s\t\t%s\t%s\t%s\n",
           i + 1, p.getName(),
           p.getPrice().toString(),
