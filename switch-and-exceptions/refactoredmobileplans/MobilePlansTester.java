@@ -1,9 +1,10 @@
 package refactoredmobileplans;
 
+import refactoredmobileplans.mobileplansfactory.MobilePlansFactory;
 
 public class MobilePlansTester {
   public static void main(String[] args) {
-    MobilePlan mobilePlans = new Data1_5GB();
+    MobilePlan mobilePlans = MobilePlansFactory.getMobilePlanForName(PlanName.Data1_5GB);
     Integer amount = mobilePlans.getRechargeAmount();
     Integer validity = mobilePlans.getValidity();
     String dataSpeed = mobilePlans.getDataSpeed();
