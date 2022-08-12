@@ -1,6 +1,6 @@
 package refactoredmobileplans;
 
-public class Talktime30 implements MobilePlan{
+public class Talktime30 extends MobilePlan{
 
   @Override
   public Integer getRechargeAmount() {
@@ -9,11 +9,16 @@ public class Talktime30 implements MobilePlan{
 
   @Override
   public Integer getValidity() {
-    throw new UnsupportedOperationException();
+    return  -1;
   }
 
   @Override
   public String getDataSpeed() {
-    throw new UnsupportedOperationException();
+    return "-";
+  }
+
+  @Override
+  public PlanName getName() {
+    return PlanName.Data2GB;
   }
 }

@@ -1,6 +1,6 @@
 package refactoredmobileplans;
 
-public class Data2GB implements MobilePlan{
+public class Data2GB extends MobilePlan{
 
   @Override
   public Integer getRechargeAmount() {
@@ -15,5 +15,10 @@ public class Data2GB implements MobilePlan{
   @Override
   public String getDataSpeed() {
     return "1.5Mbps";
+  }
+
+  @Override
+  public PlanName getName() {
+    return PlanName.Data2GB;
   }
 }
