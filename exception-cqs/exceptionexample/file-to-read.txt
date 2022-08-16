@@ -1,0 +1,3 @@
+* Function should NOT mix normal flow with error flow.
+* Normal Flow && Error Flow should be a stand-alone function.
+* Both these functions should be called inside another function with error mechanism
