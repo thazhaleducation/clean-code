@@ -5,23 +5,15 @@ import java.util.Map;
 
 public class ArgumentsExample {
   public static void main(String[] args) {
-    Map<String, Object> userInfo = new HashMap<String, Object>() {{
-      put("firstName", "Karthee");
-      put("lastName", "Nataraj");
-      put("gender", Gender.MALE);
-      put("pincode", "123123");
-    }};
-
+    UserInfo userInfo = new UserInfo("Karthee", "Nataraj", Gender.MALE);
     Map<String, String> enhancedUserDetails = getEnhancedUserDetails(userInfo);
     System.out.println(enhancedUserDetails);
   }
 
-  // Casting is not a good practice can lead to issues in runtime
-  // keys should be extracted into an enum
-  public static Map<String, String> getEnhancedUserDetails(Map<String, Object> userInfo) {
-    String greeting = ((Gender)userInfo.get("gender")).greeting();
-    String name = formatName(greeting, userInfo.get("firstName").toString(), userInfo.get("lastName").toString());
-    String address = findAddressFor(userInfo.get("pincode").toString());
+  public static Map<String, String> getEnhancedUserDetails(UserInfo userInfo) {
+    String greeting = userInfo.getGender().greeting();
+    String name = formatName(greeting, userInfo.getFirstName(), userInfo.getLastName());
+    String address = findAddressFor(userInfo.getPincode());
     return new HashMap<String, String>() {
       {
         put("name", name);
@@ -39,6 +31,32 @@ public class ArgumentsExample {
   }
 }
 
+class UserInfo {
+  private String firstName, lastName, pincode;
+  private Gender gender;
+
+  public UserInfo(String firstName, String lastName, Gender gender) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public String getPincode() {
+    return pincode;
+  }
+
+  public Gender getGender() {
+    return gender;
+  }
+}
 interface Gender {
   public static final Gender MALE = new MALE();
   public static final Gender FEMALE = new FEMALE();
