@@ -11,8 +11,7 @@ public class ArgumentsExample {
   }
 
   public static Map<String, String> getEnhancedUserDetails(UserInfo userInfo) {
-    String greeting = userInfo.getGender().greeting();
-    String name = formatName(greeting, userInfo.getFirstName(), userInfo.getLastName());
+    String name = userInfo.name();
     String address = findAddressFor(userInfo.getPincode());
     return new HashMap<String, String>() {
       {
@@ -55,6 +54,10 @@ class UserInfo {
 
   public Gender getGender() {
     return gender;
+  }
+
+  public String name() {
+    return String.format("%s %s %s", gender.greeting(), firstName, lastName);
   }
 }
 interface Gender {
