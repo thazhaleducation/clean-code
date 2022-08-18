@@ -11,18 +11,7 @@ public class ArgumentsExample {
 
 
   public static Map<String, String> getEnhancedUserDetails(String firstName, String lastName, Gender gender, String pincode) {
-    String greeting = "";
-    switch (gender) {
-      case MALE:
-        greeting = "Mr.";
-        break;
-      case FEMALE:
-        greeting = "Ms.";
-        break;
-      default:
-        greeting = "Mr./Ms.";
-        break;
-    }
+    String greeting = gender.greeting();
     String name = String.format("%s %s %s", greeting, firstName, lastName);
     String address = findAddressFor(pincode);
     return new HashMap<String, String>() {{
@@ -36,7 +25,19 @@ public class ArgumentsExample {
   }
 }
 
-enum Gender {
-  MALE,
-  FEMALE
+interface Gender {
+  public static final Gender MALE = new MALE();
+  public static final Gender FEMALE = new FEMALE();
+  public String greeting();
+}
+
+class MALE implements Gender {
+  public String greeting() {
+    return "Mr.";
+  }
+}
+class FEMALE implements Gender {
+  public String greeting() {
+    return "Mrs.";
+  }
 }
