@@ -5,15 +5,23 @@ import java.util.Map;
 
 public class ArgumentsExample {
   public static void main(String[] args) {
-    Map<String, String> enhancedUserDetails = getEnhancedUserDetails("Karthee", "Nataraj", Gender.MALE, "123123");
+    Map<String, Object> userInfo = new HashMap<String, Object>() {{
+      put("firstName", "Karthee");
+      put("lastName", "Nataraj");
+      put("gender", Gender.MALE);
+      put("pincode", "123123");
+    }};
+
+    Map<String, String> enhancedUserDetails = getEnhancedUserDetails(userInfo);
     System.out.println(enhancedUserDetails);
   }
 
-  public static Map<String, String> getEnhancedUserDetails(String firstName, String lastName, Gender gender,
-      String pincode) {
-    String greeting = gender.greeting();
-    String name = formatName(greeting, firstName, lastName);
-    String address = findAddressFor(pincode);
+  // Casting is not a good practice can lead to issues in runtime
+  // keys should be extracted into an enum
+  public static Map<String, String> getEnhancedUserDetails(Map<String, Object> userInfo) {
+    String greeting = ((Gender)userInfo.get("gender")).greeting();
+    String name = formatName(greeting, userInfo.get("firstName").toString(), userInfo.get("lastName").toString());
+    String address = findAddressFor(userInfo.get("pincode").toString());
     return new HashMap<String, String>() {
       {
         put("name", name);
