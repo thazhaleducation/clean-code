@@ -1,7 +1,9 @@
 public class Comments {
   public static void main(String[] args) {
-    int i = 1;
-    i = i + 2; // increment i by 2
-    System.out.println("Current Value of i:" + i);
+    int i = 1; // Initialize the counter to 1
+    while (i <= 10) { // While counter is less than or equal to 10
+      System.out.println("No of tickets sold:" + i);
+      i = i + 1; // increment the counter by 1
+    }
   }
 }
