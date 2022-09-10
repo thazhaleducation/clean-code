@@ -1,53 +1,11 @@
-// Usage
-public class Procedural {
-  public final int PETROL_PRICE_PER_LITRE = 112;
-  public final int DIESEL_PRICE_PER_LITRE = 102;
-
-  public double costPerKmPerPerson(Object vehicle) throws UnknownVehicleException {
-    if (vehicle instanceof Bike) {
-      Bike bike = (Bike)vehicle;
-      int seatCount = 2;
-      return PETROL_PRICE_PER_LITRE/ seatCount * bike.mileage;
-    } else if (vehicle instanceof Car) {
-      Car car = (Car) vehicle;
-      int fuelPrice = PETROL_PRICE_PER_LITRE;
-      if (car.fuleType == FuelType.DIESEL) {
-        fuelPrice = DIESEL_PRICE_PER_LITRE;
-      }
-      return fuelPrice / car.seatCount * car.mileage;
-    }
-    throw new UnknownVehicleException();
+public class Procedural{
+   public static void main(String[] args) {
+    Invoice i = new Invoice();
+    i.pay(new Cash(10));
    }
-
 }
 
 
-// Data definitions
-class Bike {
-  public int tankCapacity;
-  public int mileage;
-}
-
-class Car {
-  public int tankCapacity;
-  public int mileage;
-  public FuelType fuleType;
-  public int seatCount;
-}
-
-// class Tractor {
-//   public int tankCapacity;
-//   public int mileage;
-//   public FuelType fuleType;
-//   public int seatCount;
-// }
-
-enum FuelType {
-  PETROL,
-  DIESEL
-}
-
-class UnknownVehicleException extends Exception{}
 
 
 class Invoice {
@@ -64,7 +22,7 @@ class Invoice {
     }
   }
   
-  private void sendRequestToVISA(long cardNumber, int pin) {
+  private void sendRequestToVISA(String cardNumber, int pin) {
     System.out.println("Sending Request to VISA with card number and pin" + cardNumber + " " + pin);
   }
 
@@ -75,10 +33,13 @@ class UnsupportedPaymentMethodException extends Exception{}
 
 class Cash {
   int amount;
+  public Cash(int amount) {
+    this.amount = amount;
+  }
 }
 
 class Card {
-  long cardNumber;
+  String cardNumber;
   int pin;
 }
 
