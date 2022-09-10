@@ -1,31 +1,32 @@
 
 public class ObjectOriented {
-   public static void main(String[] args) {
-    Invoice i = new Invoice();
-    i.pay(new Cash(10));
-   }
+  public static void main(String[] args) {
+    // Pay via cash
+    Invoice invoice1 = new Invoice();
+    invoice1.pay(new Cash(10));
+
+    // Pay via card
+    Invoice invoice2 = new Invoice();
+    invoice2.pay(new Card("1234123412341234", 123));
+  }
 }
 
-
 class Invoice {
-  private PaymentMethod paymentMethod;
-
-  Invoice(PaymentMethod paymentMethod) {
-    this.paymentMethod = paymentMethod;
-  }
-
-  public void pay() {
+  public void pay(PaymentMethod paymentMethod) {
     paymentMethod.pay();
   }
 }
 
-
 interface PaymentMethod {
-   public void pay();
+  public void pay();
 }
 
 class Cash implements PaymentMethod {
   private int amount;
+
+  public Cash(int amount) {
+    this.amount = amount;
+  }
 
   @Override
   public void pay() {
@@ -35,17 +36,17 @@ class Cash implements PaymentMethod {
 }
 
 class Card implements PaymentMethod {
-  private long cardNumber;
+  private String cardNumber;
   private int pin;
 
-  Card(long cardNumber, int pin) {
+  Card(String cardNumber, int pin) {
     this.cardNumber = cardNumber;
     this.pin = pin;
   }
 
   @Override
   public void pay() {
-    sendRequestToVISA();              
+    sendRequestToVISA();
   }
 
   private void sendRequestToVISA() {
@@ -53,16 +54,3 @@ class Card implements PaymentMethod {
   }
 
 }
-
-// class Upi implements PaymentMethod {
-//   private String upiId;
-
-//   @Override
-//   public void pay() {
-//     sendRequestToUPIGateway();
-//   }
-
-//   private void sendRequestToUPIGateway() {
-//     System.out.println("Sending Request to UPI Gateway with upiId" + upiId);
-//   }
-// }

@@ -7,9 +7,14 @@ public class Procedural {
     }
   }
 
-  public static void payInvoice() {
-    Invoice i = new Invoice();
-    i.pay(new Cash(10));
+  public static void payInvoice() throws UnsupportedPaymentMethodException {
+    // Pay via cash
+    Invoice invoice1 = new Invoice();
+    invoice1.pay(new Cash(10));
+
+    // Pay via card
+    Invoice invoice2 = new Invoice();
+    invoice2.pay(new Card("1234123412341234",123));
   }
 }
 
@@ -25,6 +30,7 @@ class Invoice {
     } else {
       throw new UnsupportedPaymentMethodException();
     }
+    
   }
 
   private void sendRequestToVISA(String cardNumber, int pin) {
@@ -47,4 +53,8 @@ class Cash {
 class Card {
   String cardNumber;
   int pin;
+  public Card(String cardNumber, int pin) {
+    this.cardNumber = cardNumber;
+    this.pin = pin;
+  }
 }
