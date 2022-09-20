@@ -1,15 +1,23 @@
 package lawofdemeter;
 
 public class Customer {
-  private Wallet wallet;
+  private WalletUpdated wallet;
 
   Customer() {
-    this.wallet = new Wallet();
-    wallet.setAmount(100);
+    this.wallet = new WalletUpdated();
+    wallet.addAmount(100);
   }
 
-  public Wallet getWallet() {
+  public WalletUpdated getWallet() {
     return wallet;
+  }
+
+  public boolean payInvoice(Invoice invoice) {
+    if (wallet.hasSufficientBalance(invoice.getAmount())) {
+      wallet.deductAmount(invoice.getAmount());
+      return true;
+    }
+    return false;
   }
 
 }
