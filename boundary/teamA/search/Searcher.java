@@ -10,7 +10,7 @@ public class Searcher {
 
   public Searcher() {
     // Initialize the fake names
-    this.names = new FakeNames().getNames();
+    this.names = new NamesAdapter().getNames();
   }
 
   public Boolean isPresent(String nameToSearch) {
