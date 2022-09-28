@@ -1,14 +1,14 @@
 package boundary.teamB;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OriginalNames {
-  public ArrayList<String> names() {
-    return new ArrayList<String>() {
+  public HashMap<String, String> names() {
+    return new HashMap<String,String>() {
       {
-        add("Raj");
-        add("Prabu");
-        add("Arther");
+        put("name1", "Raj");
+        put("name2", "Prabu");
+        put("name3", "Arther");
       }
     };
   }

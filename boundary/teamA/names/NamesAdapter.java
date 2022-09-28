@@ -12,7 +12,7 @@ public class NamesAdapter implements Names{
 
   @Override
   public Set<String> getNames() {
-    return new HashSet<>(names.names());
+    return new HashSet<>(names.names().values());
   }
   
 }
